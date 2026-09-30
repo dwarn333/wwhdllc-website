@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Project Experience | WW Housing Development LLC</title>
+    <title>Trinity East Village Senior Apartments | WW Housing Development LLC</title>
     <meta
       name="description"
-      content="The affordable housing, church property, and community work the principals of WW Housing Development led before the firm was formed, across Houston."
+      content="Trinity East Village Senior: a $32 million, 90-unit affordable development for adults 55 and older at McGowan and St. Charles in Houston's Third Ward, expected to complete in Q3 2027."
     />
 
     <!-- Not deferred on purpose: this decides whether the splash shows
@@ -29,7 +29,7 @@
     />
 
     <link rel="stylesheet" href="../css/global.css" />
-    <link rel="stylesheet" href="../css/project-experience.css" />
+    <link rel="stylesheet" href="../css/project-detail.css" />
   </head>
   <body>
     <div class="splash" role="status">
@@ -218,87 +218,243 @@
     </header>
 
     <main id="main">
-      <section class="page-hero" aria-labelledby="work-hero-title">
+      <section class="page-hero" aria-labelledby="detail-hero-title">
         <div class="page-hero__bg" aria-hidden="true">
           <picture>
-            <source media="(min-width: 48em)" srcset="../images/home/hero/hero-4.webp" type="image/webp" />
-            <source media="(min-width: 48em)" srcset="../images/home/hero/hero-4.jpg" type="image/jpeg" />
-            <source srcset="../images/home/hero/hero-4-m.webp" type="image/webp" />
-            <img src="../images/home/hero/hero-4-m.jpg" alt="" width="800" height="1000" decoding="async" fetchpriority="high" />
+            <source srcset="../images/project-experience/trinity-east-village/site-work-2.webp" type="image/webp" />
+            <img src="../images/project-experience/trinity-east-village/site-work-2.jpg" alt="" width="480" height="640" decoding="async" fetchpriority="high" />
           </picture>
         </div>
 
         <div class="container page-hero__inner">
-          <p class="page-hero__eyebrow">Project Experience</p>
+          <h1 class="page-hero__title" id="detail-hero-title">Trinity East Village Senior Apartments</h1>
 
-          <h1 class="page-hero__title">
-            The work the principals have already <span class="mark-underline">carried</span>
-          </h1>
-
-          <p class="page-hero__text">
-            WW Housing Development is a new firm. Its principals are not. Between them they have
-            already carried affordable housing, church property, and community projects across
-            Houston.
-          </p>
+          <nav class="crumbs" aria-label="Breadcrumb">
+            <ol class="crumbs__list">
+              <li><a href="../index.html">Home</a></li>
+              <li><a href="project-experience.html">Project Experience</a></li>
+              <li aria-current="page">Trinity East Village Senior Apartments</li>
+            </ol>
+          </nav>
         </div>
       </section>
 
-      <section class="section works curve-out" aria-labelledby="works-heading">
-        <div class="container">
-          <header class="section-header">
-            <p class="section-badge">
-              <span class="section-badge__dot" aria-hidden="true"></span>
-              Our Work
-            </p>
+      <section class="section detail" aria-labelledby="detail-heading">
+        <h2 class="visually-hidden" id="detail-heading">Project detail</h2>
 
-            <h2 class="section-heading" id="works-heading">View our projects below</h2>
-
-            <p class="section-intro">
-              Trinity East Village Senior, a 90-unit affordable development for adults 55 and
-              older, is under construction now in Houston&rsquo;s Third Ward.
-            </p>
-          </header>
-
+        <div class="container detail__grid">
           <!--
-            Only projects the principals are actually working on belong here.
-            Trinity East Village Senior is the one current project; add more
-            cards (and drop the --single modifier) as new ones are confirmed.
+            The column is far shorter than the article beside it, so on large
+            screens it is stuck to the viewport and travels down with the
+            scroll rather than leaving a long run of empty page.
           -->
-          <ul class="works__grid works__grid--single">
-            <li class="work">
-              <div class="work__media">
+          <aside class="detail__aside">
+            <!-- callout-bg | stand-in -->
+            <div class="side-card">
+              <div class="side-card__bg" aria-hidden="true">
+                <picture>
+                  <source media="(min-width: 48em)" srcset="../images/our-process/callout-bg.webp" type="image/webp" />
+                  <source media="(min-width: 48em)" srcset="../images/our-process/callout-bg.jpg" type="image/jpeg" />
+                  <source srcset="../images/our-process/callout-bg-m.webp" type="image/webp" />
+                  <img src="../images/our-process/callout-bg-m.jpg" alt="" width="800" height="780" decoding="async" loading="lazy" />
+                </picture>
+              </div>
+
+              <span class="side-card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" /></svg>
+              </span>
+
+              <p class="side-card__text">Bring us your land and your questions. The first conversation costs nothing.</p>
+
+              <p class="side-card__value">Phone: <a href="tel:+18328959941">(832) 895-9941</a></p>
+            </div>
+          </aside>
+
+          <article class="detail__body">
+            <ul class="detail__gallery">
+              <li class="detail__gallery-item detail__gallery-item--rendering">
+                <picture>
+                  <source srcset="../images/project-experience/trinity-east-village/rendering.webp" type="image/webp" />
+                  <img src="../images/project-experience/trinity-east-village/rendering.jpg" alt="Architectural rendering of Trinity East Village Senior Apartments on the project plan set" width="480" height="640" decoding="async" loading="lazy" />
+                </picture>
+              </li>
+              <li class="detail__gallery-item">
+                <picture>
+                  <source srcset="../images/project-experience/trinity-east-village/site-work-1.webp" type="image/webp" />
+                  <img src="../images/project-experience/trinity-east-village/site-work-1.jpg" alt="Excavator clearing and grading the Trinity East Village site" width="480" height="640" decoding="async" loading="lazy" />
+                </picture>
+              </li>
+              <li class="detail__gallery-item">
                 <picture>
                   <source srcset="../images/project-experience/trinity-east-village/site-work-2.webp" type="image/webp" />
                   <img src="../images/project-experience/trinity-east-village/site-work-2.jpg" alt="Crews laying underground utilities across the Trinity East Village site" width="480" height="640" decoding="async" loading="lazy" />
                 </picture>
+              </li>
+            </ul>
+
+            <p class="detail__lead">Trinity East Village Senior, a 90-unit affordable development, broke ground at the corner of McGowan and St. Charles streets in Houston&rsquo;s Third Ward.</p>
+
+            <p class="detail__text">The development will serve adults aged 55 or older with low or extremely low incomes. It received a 9% Low Income Housing Tax Credit, allocated by the state, and the $32 million development is expected to be completed in the third quarter of 2027.</p>
+
+            <ul class="stats">
+              <li class="stat">
+                <p class="stat__value">90</p>
+                <p class="stat__text">Affordable apartments for adults aged 55 or older.</p>
+                <p class="stat__tag"><span class="stat__tag-dot" aria-hidden="true"></span>Units</p>
+              </li>
+
+              <li class="stat">
+                <p class="stat__value">$32M</p>
+                <p class="stat__text">Total development cost, supported by a 9% Low Income Housing Tax Credit.</p>
+                <p class="stat__tag"><span class="stat__tag-dot" aria-hidden="true"></span>Development value</p>
+              </li>
+            </ul>
+
+            <p class="detail__text">Expected completion: third quarter of 2027.</p>
+
+            <h2 class="detail__heading">What we would bring to a project like this</h2>
+
+            <p class="detail__text">The same sequence the firm runs on every engagement, in plain language, with a straight answer at each stage about whether the project still works.</p>
+
+            <div class="gets">
+              <!-- feasibility-vision | stand-in -->
+              <div class="gets__media" aria-hidden="true">
+                <picture>
+                  <source media="(min-width: 48em)" srcset="../images/home/how-it-works/feasibility-vision.webp" type="image/webp" />
+                  <source media="(min-width: 48em)" srcset="../images/home/how-it-works/feasibility-vision.jpg" type="image/jpeg" />
+                  <source srcset="../images/home/how-it-works/feasibility-vision-m.webp" type="image/webp" />
+                  <img src="../images/home/how-it-works/feasibility-vision-m.jpg" alt="" width="640" height="800" decoding="async" loading="lazy" />
+                </picture>
               </div>
 
-              <div class="work__panel">
-                <p class="work__tag">
-                  <span class="work__tag-dot" aria-hidden="true"></span>
-                  Under Construction
-                </p>
+              <ul class="gets__list">
+                <li class="gets__item">
+                  <span class="gets__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 7l10 5 10-5-10-5z" /><polyline points="2 17 12 22 22 17" /><polyline points="2 12 12 17 22 12" /></svg>
+                  </span>
 
-                <h3 class="work__title">Trinity East Village Senior Apartments</h3>
+                  <div>
+                    <h3 class="gets__title">A route to the money, mapped</h3>
+                    <p class="gets__text">LIHTC, City of Houston programmes, HUD routes and private capital assessed against what the site and the organisation can actually carry.</p>
+                  </div>
+                </li>
 
-                <ul class="work__meta">
-                  <li>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" /><circle cx="12" cy="10" r="3" /></svg>
-                    Third Ward, Houston
-                  </li>
-                  <li>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="20" x2="18" y2="10" /><line x1="12" y1="20" x2="12" y2="4" /><line x1="6" y1="20" x2="6" y2="14" /></svg>
-                    $32 Million
-                  </li>
-                </ul>
+                <li class="gets__item">
+                  <span class="gets__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4" /><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" /></svg>
+                  </span>
 
-                <a class="link-arrow work__link" href="trinity-east-village.html">
-                  <span class="link-arrow__label">View project</span>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7" /><polyline points="7 7 17 7 17 17" /></svg>
-                </a>
-              </div>
-            </li>
-          </ul>
+                  <div>
+                    <h3 class="gets__title">Approvals carried, not handed over</h3>
+                    <p class="gets__text">Submission and sequencing through the City of Houston, with one named liaison so nothing sits waiting on an unowned task.</p>
+                  </div>
+                </li>
+
+                <li class="gets__item">
+                  <span class="gets__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /></svg>
+                  </span>
+
+                  <div>
+                    <h3 class="gets__title">One point of contact to close</h3>
+                    <p class="gets__text">Construction monitored against the plan and closings coordinated, with the congregation keeping an advocate at the table until residents move in.</p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <h2 class="detail__heading">Frequently asked questions</h2>
+
+            <p class="detail__text">The questions churches and community groups ask most often about a development of this kind.</p>
+
+            <!-- DRAFT COPY. Confirm with the principals before launch. -->
+            <ul class="faq__list" data-faq>
+              <li class="faq__item">
+                <h3 class="faq__question">
+                  <button class="faq__trigger" type="button" id="pd-faq-1-label" aria-expanded="true" aria-controls="pd-faq-1">
+                    <span class="faq__trigger-text">What was the firm's role on a project like this?</span>
+                    <span class="faq__trigger-icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5" /><polyline points="5 12 12 5 19 12" /></svg>
+                    </span>
+                  </button>
+                </h3>
+
+                <div class="faq__answer" id="pd-faq-1" role="region" aria-labelledby="pd-faq-1-label">
+                  <div class="faq__answer-inner">
+                    <p class="faq__text">Advisory and navigation rather than construction. The work runs from the first read on the land through financing, developer selection, City of Houston approvals and monitoring to close &mdash; with one point of contact the whole way.</p>
+                  </div>
+                </div>
+              </li>
+
+              <li class="faq__item">
+                <h3 class="faq__question">
+                  <button class="faq__trigger" type="button" id="pd-faq-2-label" aria-expanded="true" aria-controls="pd-faq-2">
+                    <span class="faq__trigger-text">How long does a development of this size take?</span>
+                    <span class="faq__trigger-icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5" /><polyline points="5 12 12 5 19 12" /></svg>
+                    </span>
+                  </button>
+                </h3>
+
+                <div class="faq__answer" id="pd-faq-2" role="region" aria-labelledby="pd-faq-2-label">
+                  <div class="faq__answer-inner">
+                    <p class="faq__text">Trinity East Village Senior has broken ground and is expected to be completed in the third quarter of 2027. Timelines vary with the financing route and with approvals.</p>
+                  </div>
+                </div>
+              </li>
+
+              <li class="faq__item">
+                <h3 class="faq__question">
+                  <button class="faq__trigger" type="button" id="pd-faq-3-label" aria-expanded="true" aria-controls="pd-faq-3">
+                    <span class="faq__trigger-text">Who owns the land at the end of it?</span>
+                    <span class="faq__trigger-icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5" /><polyline points="5 12 12 5 19 12" /></svg>
+                    </span>
+                  </button>
+                </h3>
+
+                <div class="faq__answer" id="pd-faq-3" role="region" aria-labelledby="pd-faq-3-label">
+                  <div class="faq__answer-inner">
+                    <p class="faq__text">That depends on the structure chosen at the outset. Owner-financed land as equity keeps more control with the congregation; a land sale with participation trades that for a share of the upside without the development risk.</p>
+                  </div>
+                </div>
+              </li>
+
+              <li class="faq__item">
+                <h3 class="faq__question">
+                  <button class="faq__trigger" type="button" id="pd-faq-4-label" aria-expanded="true" aria-controls="pd-faq-4">
+                    <span class="faq__trigger-text">What does a congregation need to have ready before starting?</span>
+                    <span class="faq__trigger-icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5" /><polyline points="5 12 12 5 19 12" /></svg>
+                    </span>
+                  </button>
+                </h3>
+
+                <div class="faq__answer" id="pd-faq-4" role="region" aria-labelledby="pd-faq-4-label">
+                  <div class="faq__answer-inner">
+                    <p class="faq__text">The property, the title, and a clear sense of what the organisation wants the project to do. Everything else &mdash; feasibility, AMI modelling, funding routes &mdash; is what the engagement is for.</p>
+                  </div>
+                </div>
+              </li>
+
+              <li class="faq__item">
+                <h3 class="faq__question">
+                  <button class="faq__trigger" type="button" id="pd-faq-5-label" aria-expanded="true" aria-controls="pd-faq-5">
+                    <span class="faq__trigger-text">Can you help if our site turns out not to work?</span>
+                    <span class="faq__trigger-icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5" /><polyline points="5 12 12 5 19 12" /></svg>
+                    </span>
+                  </button>
+                </h3>
+
+                <div class="faq__answer" id="pd-faq-5" role="region" aria-labelledby="pd-faq-5-label">
+                  <div class="faq__answer-inner">
+                    <p class="faq__text">We will say so early and explain why. Not every site can carry housing, and finding that out in a feasibility review costs far less than finding it out a year in.</p>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </article>
         </div>
       </section>
 

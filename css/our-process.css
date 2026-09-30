@@ -792,6 +792,12 @@
     grid-row: 1;
   }
 
+  /* The rail ends on the centred marker here, so the overhang cover is not
+     needed — left on, it paints over the left edge of the last photograph */
+  .step:last-child::before {
+    content: none;
+  }
+
   /* Odd steps: photograph left, copy right. Even steps: the reverse. */
   .step:nth-child(odd) .step__media {
     grid-column: 1;

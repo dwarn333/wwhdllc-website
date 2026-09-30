@@ -149,6 +149,19 @@
   color: var(--clr-accent-light);
 }
 
+/* One project on its own: a single centred card rather than one cell of a
+   grid with empty tracks beside it. Capped because the photographs are small. */
+.works__grid--single {
+  max-width: 34rem;
+  margin-inline: auto;
+}
+
+@media (min-width: 48em) {
+  .works__grid.works__grid--single {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
 /* ==========================================================================
    Larger screens — min-width only
    ========================================================================== */

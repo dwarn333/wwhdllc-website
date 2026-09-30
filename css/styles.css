@@ -492,6 +492,17 @@
     max-width: none;
     margin-inline: 0;
   }
+
+  /* One project on its own: kept at its small-screen width and centred,
+     rather than one cell of a three-column row */
+  .projects__list--single {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .projects__list--single .project {
+    max-width: 34rem;
+    margin-inline: auto;
+  }
 }
 
 /* ==========================================================================

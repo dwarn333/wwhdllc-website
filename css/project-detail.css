@@ -75,6 +75,40 @@
   object-fit: cover;
 }
 
+/* Several portrait photographs in place of the single landscape image —
+   one column on phones, three abreast from tablet up */
+.detail__gallery {
+  display: grid;
+  gap: var(--space-sm);
+  margin: 0 0 var(--space-xl);
+}
+
+.detail__gallery-item {
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  background-color: rgba(15, 42, 68, 0.06);
+}
+
+.detail__gallery-item img {
+  display: block;
+  width: 100%;
+  /* Overrides the height attribute, which otherwise wins over aspect-ratio */
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+/* The rendering sits low on the printed sheet — keep the building in frame */
+.detail__gallery-item--rendering img {
+  object-position: 50% 70%;
+}
+
+@media (min-width: 40em) {
+  .detail__gallery {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
 .detail__lead {
   margin: 0 0 var(--space-md);
   color: var(--clr-body);
