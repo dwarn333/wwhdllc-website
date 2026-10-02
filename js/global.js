@@ -469,3 +469,108 @@
     marquee.classList.toggle('is-paused', !paused);
   });
 })();
+
+/* ==========================================================================
+   Fade in on scroll
+
+   Content fades and rises into place as each piece reaches the viewport.
+   Nothing is marked up by hand: this tags the outermost text, image and card
+   elements in every section below the hero, so a card fades in as one unit
+   rather than each line inside it separately, while the badge, heading and
+   intro of a section header arrive one after another.
+
+   The hidden state is only applied here, so without JavaScript everything is
+   simply visible. Skipped entirely for visitors who prefer reduced motion.
+   ========================================================================== */
+
+(function () {
+  'use strict';
+
+  if (typeof window.IntersectionObserver !== 'function' ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    return;
+  }
+
+  /* Sections that sit above the fold or animate on their own */
+  var SKIP_SECTIONS = '.hero, .page-hero, .lead, .marquee';
+  var TARGETS = 'h1, h2, h3, h4, p, li, picture, img, figure, blockquote, ' +
+                'form, iframe, a.btn, a.link-arrow';
+  /* Matches the transition in css/global.css */
+  var DURATION_MS = 700;
+  var STAGGER_MS = 90;
+  var MAX_DELAY_MS = 450;
+
+  var sections = document.querySelectorAll('main > section');
+  var targets = [];
+  var i;
+  var j;
+
+  for (i = 0; i < sections.length; i += 1) {
+    if (sections[i].matches(SKIP_SECTIONS)) {
+      continue;
+    }
+
+    var found = sections[i].querySelectorAll(TARGETS);
+
+    for (j = 0; j < found.length; j += 1) {
+      var el = found[j];
+
+      /* Screen-reader-only headings have nothing to fade */
+      if (el.classList.contains('visually-hidden')) {
+        continue;
+      }
+
+      /* Outermost only: anything inside an element already fading is carried
+         along with it */
+      var parent = el.parentElement.closest('[data-reveal]');
+
+      if (parent && sections[i].contains(parent)) {
+        continue;
+      }
+
+      el.setAttribute('data-reveal', '');
+      targets.push(el);
+    }
+  }
+
+  if (targets.length === 0) {
+    return;
+  }
+
+  /* Once settled, the attribute comes off so the element's own transitions
+     (hover states and the like) are back in charge */
+  function settle(el) {
+    window.setTimeout(function () {
+      el.removeAttribute('data-reveal');
+      el.style.removeProperty('--reveal-delay');
+    }, DURATION_MS + MAX_DELAY_MS + 50);
+  }
+
+  var observer = new window.IntersectionObserver(
+    function (entries, obs) {
+      var batch = 0;
+      var k;
+
+      for (k = 0; k < entries.length; k += 1) {
+        if (!entries[k].isIntersecting) {
+          continue;
+        }
+
+        var target = entries[k].target;
+        /* Elements arriving together cascade rather than land at once */
+        var delay = Math.min(batch * STAGGER_MS, MAX_DELAY_MS);
+
+        target.style.setProperty('--reveal-delay', delay + 'ms');
+        target.setAttribute('data-reveal', 'shown');
+        obs.unobserve(target);
+        settle(target);
+        batch += 1;
+      }
+    },
+    { rootMargin: '0px 0px -8% 0px', threshold: 0.12 }
+  );
+
+  for (i = 0; i < targets.length; i += 1) {
+    observer.observe(targets[i]);
+  }
+})();

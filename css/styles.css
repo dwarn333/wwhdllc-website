@@ -485,7 +485,7 @@
 @media (min-width: 64em) {
   /* Two columns: four projects sit as an even 2 × 2 */
   .projects__list {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: var(--space-lg);
   }
 
