@@ -57,6 +57,14 @@
   gap: var(--space-lg);
 }
 
+/* Keeps each block at its full height. Without this, once the column is
+   capped to the viewport on large screens, flex squeezes the project list
+   and its overflow: hidden clips the last entries instead of the column
+   scrolling. */
+.detail__aside > * {
+  flex-shrink: 0;
+}
+
 .detail__body {
   min-width: 0;
 }

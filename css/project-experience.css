@@ -149,19 +149,6 @@
   color: var(--clr-accent-light);
 }
 
-/* One project on its own: a single centred card rather than one cell of a
-   grid with empty tracks beside it. Capped because the photographs are small. */
-.works__grid--single {
-  max-width: 34rem;
-  margin-inline: auto;
-}
-
-@media (min-width: 48em) {
-  .works__grid.works__grid--single {
-    grid-template-columns: minmax(0, 1fr);
-  }
-}
-
 /* ==========================================================================
    Larger screens — min-width only
    ========================================================================== */
@@ -175,11 +162,9 @@
   }
 }
 
+/* Stays at two columns: four projects sit as an even 2 × 2 rather than a row
+   of three with one left on its own */
 @media (min-width: 64em) {
-  .works__grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
   .work {
     min-height: 30rem;
   }
