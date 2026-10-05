@@ -670,6 +670,47 @@ button {
   color: var(--clr-primary);
 }
 
+/* Draws the eye: two quick hops, then still, repeating every 4 seconds.
+   Uses transform, so it stacks with the scroll fade-in (which uses translate). */
+.btn--bounce {
+  animation: btn-bounce 4s var(--ease-out) infinite;
+}
+
+.btn--bounce:hover,
+.btn--bounce:focus-visible {
+  animation-play-state: paused;
+}
+
+@keyframes btn-bounce {
+  0%,
+  12%,
+  24%,
+  100% {
+    transform: translateY(0);
+  }
+
+  6% {
+    transform: translateY(-0.5rem);
+  }
+
+  18% {
+    transform: translateY(-0.25rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn--bounce {
+    animation: none;
+  }
+}
+
+/* Leading line icon, e.g. the download arrow on the brochure buttons */
+.btn--icon-lead svg {
+  width: 1.125rem;
+  height: 1.125rem;
+  flex: none;
+}
+
 /* Circular icon button — outlined, used in the utility bar */
 .btn-icon {
   display: inline-flex;
@@ -2970,6 +3011,51 @@ a.contact__point-value:focus-visible {
   margin-top: var(--space-sm);
 }
 
+/* Brochure — a quieter second route under the main CTA, set off by a hairline
+   so it reads as an alternative rather than a second ask. Shared with the
+   /start/ landing page's closing band (.closer__brochure). */
+.cta__brochure,
+.closer__brochure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+  width: 100%;
+  max-width: 34rem;
+  margin-top: var(--space-lg);
+  padding-top: var(--space-xl);
+  border-top: 1px solid var(--clr-line-on-dark);
+}
+
+.cta__brochure-text,
+.closer__brochure-text {
+  margin: 0;
+  color: rgba(250, 247, 242, 0.78);
+  font-size: var(--fs-300);
+  line-height: 1.65;
+}
+
+/* Brochure cover, between the line above and the download button: the whole
+   cover at its own 16:9 shape, kept small (about 213 x 120). The grey border
+   lifts it off the photograph behind. */
+.cta__brochure-cover,
+.closer__brochure-cover {
+  display: block;
+  width: 13.3125rem;
+  flex: none;
+  overflow: hidden;
+  border: 3px solid #c8ccd0;
+  border-radius: var(--radius-md);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+}
+
+.cta__brochure-cover img,
+.closer__brochure-cover img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 /* ==========================================================================
    15. Splash screen
    First arrival in a visit only — js/splash-init.js adds .has-splash to
@@ -3087,4 +3173,157 @@ a.contact__point-value:focus-visible {
 :root [data-reveal="shown"] {
   opacity: 1;
   translate: none;
+}
+
+
+/* ==========================================================================
+   Brochure pop-up
+   Built and opened by js/global.js — once per visitor, a few seconds after
+   they arrive. A native <dialog>, so focus, Escape and the backdrop come from
+   the browser.
+   ========================================================================== */
+.brochure-modal {
+  width: min(32rem, calc(100% - 2 * var(--space-md)));
+  max-height: calc(100% - 2 * var(--space-md));
+  margin: auto;
+  padding: 0;
+  overflow: auto;
+  border: 0;
+  border-radius: var(--radius-lg);
+  background-color: var(--clr-surface);
+  color: var(--clr-body);
+  box-shadow: 0 30px 70px rgba(10, 30, 50, 0.4);
+}
+
+.brochure-modal::backdrop {
+  background-color: rgba(10, 30, 50, 0.6);
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+}
+
+.brochure-modal[open] {
+  animation: brochure-modal-in var(--t-panel) var(--ease-out);
+}
+
+.brochure-modal[open]::backdrop {
+  animation: brochure-backdrop-in var(--t-panel) var(--ease-out);
+}
+
+@keyframes brochure-modal-in {
+  from {
+    opacity: 0;
+    transform: translateY(1rem) scale(0.98);
+  }
+}
+
+@keyframes brochure-backdrop-in {
+  from {
+    opacity: 0;
+  }
+}
+
+.brochure-modal__cover img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.brochure-modal__close {
+  position: absolute;
+  top: var(--space-sm);
+  right: var(--space-sm);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background-color: rgba(250, 247, 242, 0.92);
+  color: var(--clr-primary);
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(10, 30, 50, 0.25);
+  transition: background-color var(--t-base) var(--ease-out);
+}
+
+.brochure-modal__close:hover,
+.brochure-modal__close:focus-visible {
+  background-color: var(--clr-accent-light);
+}
+
+.brochure-modal__close svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.brochure-modal__body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  padding: var(--space-lg);
+}
+
+.brochure-modal__eyebrow {
+  margin: 0;
+  color: var(--clr-accent);
+  font-size: var(--fs-100);
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.brochure-modal__title {
+  margin: 0;
+  color: var(--clr-primary);
+  font-size: clamp(1.25rem, 4vw, 1.5rem);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+.brochure-modal__text {
+  margin: 0;
+  color: var(--clr-muted);
+  font-size: var(--fs-300);
+  line-height: 1.6;
+}
+
+.brochure-modal__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-sm) var(--space-lg);
+  margin-top: var(--space-xs);
+}
+
+/* "No thanks" — a text button, so Download is plainly the main action */
+.brochure-modal__dismiss {
+  padding: var(--space-xs) 0;
+  border: 0;
+  background: none;
+  color: var(--clr-muted);
+  font: inherit;
+  font-size: var(--fs-300);
+  font-weight: var(--fw-semibold);
+  text-decoration: underline;
+  text-decoration-color: var(--clr-line);
+  text-underline-offset: 0.25em;
+  cursor: pointer;
+}
+
+.brochure-modal__dismiss:hover,
+.brochure-modal__dismiss:focus-visible {
+  color: var(--clr-primary);
+  text-decoration-color: currentColor;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brochure-modal[open],
+  .brochure-modal[open]::backdrop {
+    animation: none;
+  }
 }

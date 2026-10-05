@@ -574,3 +574,120 @@
     observer.observe(targets[i]);
   }
 })();
+
+/* ==========================================================================
+   Brochure pop-up
+
+   Offers the client overview PDF once per visitor, a few seconds after they
+   arrive (counted from when the splash screen clears). Built here rather than
+   pasted into every page, so there is one copy of the markup to maintain.
+   Paths are resolved from this script's own URL, which works from the root,
+   /html/ and /start/ alike.
+
+   Not shown if the visitor has already seen it, or the browser has no
+   <dialog>.
+   ========================================================================== */
+
+(function () {
+  'use strict';
+
+  var script = document.currentScript;
+  var STORAGE_KEY = 'wwh-brochure-offered';
+  var DELAY_MS = 5000;
+
+  if (!script || typeof window.HTMLDialogElement !== 'function') {
+    return;
+  }
+
+  /* Storage can be unavailable (private windows, blocked site data); then the
+     pop-up simply shows on each new page load rather than breaking */
+  function alreadyOffered() {
+    try {
+      return window.localStorage.getItem(STORAGE_KEY) === '1';
+    } catch (error) {
+      return false;
+    }
+  }
+
+  function markOffered() {
+    try {
+      window.localStorage.setItem(STORAGE_KEY, '1');
+    } catch (error) {
+      /* Nothing to do */
+    }
+  }
+
+  if (alreadyOffered()) {
+    return;
+  }
+
+  var root = new URL('../', script.src);
+  var pdf = new URL('downloads/WW-Housing-Client-Overview.pdf', root).href;
+  var cover = new URL('images/brochure/brochure-cover-m', root).href;
+
+  var DOWNLOAD_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" /></svg>';
+  var CLOSE_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>';
+
+  var dialog = document.createElement('dialog');
+  dialog.className = 'brochure-modal';
+  dialog.setAttribute('aria-labelledby', 'brochure-modal-title');
+  dialog.innerHTML =
+    '<picture class="brochure-modal__cover">' +
+      '<source srcset="' + cover + '.webp" type="image/webp" />' +
+      '<img src="' + cover + '.jpg" alt="" width="640" height="360" decoding="async" />' +
+    '</picture>' +
+    '<button class="brochure-modal__close" type="button" data-brochure-close aria-label="Close">' + CLOSE_ICON + '</button>' +
+    '<div class="brochure-modal__body">' +
+      '<p class="brochure-modal__eyebrow">Free Guide</p>' +
+      '<h2 class="brochure-modal__title" id="brochure-modal-title">Turning church land into homes for our community</h2>' +
+      '<p class="brochure-modal__text">A plain-language overview for pastors, church leaders, and community groups in the Houston area. PDF, 10 pages.</p>' +
+      '<div class="brochure-modal__actions">' +
+        '<a class="btn btn--primary btn--icon-lead" href="' + pdf + '" download data-brochure-close>' + DOWNLOAD_ICON + 'Download the Brochure</a>' +
+        '<button class="brochure-modal__dismiss" type="button" data-brochure-close>No thanks</button>' +
+      '</div>' +
+    '</div>';
+
+  /* Every way out — close, No thanks, Download, Escape — counts as offered */
+  dialog.addEventListener('click', function (event) {
+    if (event.target.closest('[data-brochure-close]')) {
+      dialog.close();
+    } else if (event.target === dialog) {
+      /* A click on the backdrop lands on the dialog element itself */
+      dialog.close();
+    }
+  });
+
+  dialog.addEventListener('close', markOffered);
+
+  function open() {
+    /* Never on top of the mobile menu, or twice */
+    if (document.body.classList.contains('has-open-nav') || dialog.open) {
+      window.setTimeout(open, DELAY_MS);
+      return;
+    }
+
+    document.body.appendChild(dialog);
+    dialog.showModal();
+    markOffered();
+  }
+
+  function schedule() {
+    window.setTimeout(open, DELAY_MS);
+  }
+
+  /* Wait for the splash screen, if this visit has one */
+  var html = document.documentElement;
+
+  if (html.classList.contains('has-splash') && typeof window.MutationObserver === 'function') {
+    var observer = new window.MutationObserver(function () {
+      if (!html.classList.contains('has-splash')) {
+        observer.disconnect();
+        schedule();
+      }
+    });
+
+    observer.observe(html, { attributes: true, attributeFilter: ['class'] });
+  } else {
+    schedule();
+  }
+})();
