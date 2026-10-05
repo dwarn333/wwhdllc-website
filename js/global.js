@@ -493,7 +493,10 @@
 
   /* Sections that sit above the fold or animate on their own */
   var SKIP_SECTIONS = '.hero, .page-hero, .lead, .marquee';
-  var TARGETS = 'h1, h2, h3, h4, p, li, picture, img, figure, blockquote, ' +
+  /* The swipe-carousel lists fade as one unit: on phones they are sideways
+     strips, and per-card fading would keep the peeking next card invisible */
+  var TARGETS = '.projects__list, .works__grid, ' +
+                'h1, h2, h3, h4, p, li, picture, img, figure, blockquote, ' +
                 'form, iframe, a.btn, a.link-arrow';
   /* Matches the transition in css/global.css */
   var DURATION_MS = 700;
@@ -578,7 +581,7 @@
 /* ==========================================================================
    Brochure pop-up
 
-   Offers the client overview PDF once per visitor, a few seconds after they
+   Offers the client overview PDF once per visitor, about a second after they
    arrive (counted from when the splash screen clears). Built here rather than
    pasted into every page, so there is one copy of the markup to maintain.
    Paths are resolved from this script's own URL, which works from the root,
@@ -593,7 +596,9 @@
 
   var script = document.currentScript;
   var STORAGE_KEY = 'wwh-brochure-offered';
-  var DELAY_MS = 5000;
+  /* Short on purpose: long enough for the page to register, short enough
+     that it arrives before the visitor is deep into the first section */
+  var DELAY_MS = 1000;
 
   if (!script || typeof window.HTMLDialogElement !== 'function') {
     return;
@@ -662,7 +667,7 @@
   function open() {
     /* Never on top of the mobile menu, or twice */
     if (document.body.classList.contains('has-open-nav') || dialog.open) {
-      window.setTimeout(open, DELAY_MS);
+      window.setTimeout(open, 3000);
       return;
     }
 
@@ -689,5 +694,145 @@
     observer.observe(html, { attributes: true, attributeFilter: ['class'] });
   } else {
     schedule();
+  }
+})();
+
+/* ==========================================================================
+   Swipe carousels (phones)
+
+   Below 48em, css/global.css turns each project list below into a sideways swipe
+   strip. This marks the list (.swipe-track), builds prev / next buttons and
+   dots after it (.swipe-controls), keeps them in step with the scroll position
+   (swipe or buttons), and disables the arrows at either end. From 48em up the
+   CSS hides the controls and the list is a grid again, so nothing here has to
+   switch off.
+   ========================================================================== */
+
+(function () {
+  'use strict';
+
+  /* list, its cards, what each dot is called */
+  var CAROUSELS = [
+    { list: '.projects__list', card: '.project', label: '.project__title', noun: 'project' },
+    { list: '.works__grid', card: '.work', label: '.work__title', noun: 'project' }
+  ];
+  var PREV_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6" /></svg>';
+  var NEXT_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6" /></svg>';
+  var count = 0;
+  var c;
+  var l;
+
+  for (c = 0; c < CAROUSELS.length; c += 1) {
+    var lists = document.querySelectorAll(CAROUSELS[c].list);
+
+    for (l = 0; l < lists.length; l += 1) {
+      setUp(lists[l], CAROUSELS[c]);
+    }
+  }
+
+  function setUp(track, config) {
+    var cards = track.querySelectorAll(':scope > ' + config.card);
+
+    if (cards.length < 2) {
+      return;
+    }
+
+    count += 1;
+    track.id = track.id || 'swipe-track-' + count;
+    track.classList.add('swipe-track');
+
+    var controls = document.createElement('div');
+    controls.className = 'swipe-controls';
+    controls.innerHTML =
+      '<button class="swipe-controls__arrow" type="button" aria-controls="' + track.id + '" aria-label="Previous ' + config.noun + '">' + PREV_ICON + '</button>' +
+      '<div class="swipe-controls__dots"></div>' +
+      '<button class="swipe-controls__arrow" type="button" aria-controls="' + track.id + '" aria-label="Next ' + config.noun + '">' + NEXT_ICON + '</button>';
+    track.parentNode.insertBefore(controls, track.nextSibling);
+
+    var arrows = controls.querySelectorAll('.swipe-controls__arrow');
+    var prev = arrows[0];
+    var next = arrows[1];
+    var dotsWrap = controls.querySelector('.swipe-controls__dots');
+    var dots = [];
+    var i;
+
+    for (i = 0; i < cards.length; i += 1) {
+      var name = cards[i].querySelector(config.label);
+      var dot = document.createElement('button');
+
+      dot.type = 'button';
+      dot.className = 'swipe-controls__dot';
+      dot.setAttribute('aria-label', 'Show ' + (name ? name.textContent.trim() : config.noun + ' ' + (i + 1)));
+      dot.addEventListener('click', goTo.bind(null, i));
+      dotsWrap.appendChild(dot);
+      dots.push(dot);
+    }
+
+    /* Cards snap to the centre of the strip, so centre the one asked for */
+    function goTo(target) {
+      var card = cards[Math.max(0, Math.min(cards.length - 1, target))];
+
+      track.scrollTo({
+        left: card.offsetLeft - (track.clientWidth - card.offsetWidth) / 2
+      });
+    }
+
+    /* The card whose centre sits nearest the strip's centre */
+    function current() {
+      var middle = track.scrollLeft + track.clientWidth / 2;
+      var best = 0;
+      var bestDistance = Infinity;
+      var j;
+
+      for (j = 0; j < cards.length; j += 1) {
+        var distance = Math.abs(cards[j].offsetLeft + cards[j].offsetWidth / 2 - middle);
+
+        if (distance < bestDistance) {
+          bestDistance = distance;
+          best = j;
+        }
+      }
+
+      return best;
+    }
+
+    function update() {
+      var active = current();
+      var j;
+
+      for (j = 0; j < dots.length; j += 1) {
+        if (j === active) {
+          dots[j].setAttribute('aria-current', 'true');
+        } else {
+          dots[j].removeAttribute('aria-current');
+        }
+      }
+
+      prev.disabled = active === 0;
+      next.disabled = active === cards.length - 1;
+    }
+
+    prev.addEventListener('click', function () {
+      goTo(current() - 1);
+    });
+
+    next.addEventListener('click', function () {
+      goTo(current() + 1);
+    });
+
+    var ticking = false;
+
+    track.addEventListener('scroll', function () {
+      if (!ticking) {
+        ticking = true;
+        window.requestAnimationFrame(function () {
+          ticking = false;
+          update();
+        });
+      }
+    }, { passive: true });
+
+    window.addEventListener('resize', update);
+    update();
   }
 })();
