@@ -114,18 +114,7 @@
             <h2 class="book__title">Book a consultation</h2>
             <p class="book__text">Tell us how to reach you and we will be in touch to arrange a time.</p>
 
-            <!--
-              TO WIRE: replace YOUR_FORM_ID with the Formspree form id from the
-              firm's account (formspree.io -> New Form -> copy the endpoint).
-              Until then the form posts nowhere and nothing is captured.
-
-              _subject  labels the notification email.
-              _gotcha   is Formspree's honeypot: real people never see it, bots
-                        fill it in, and Formspree drops those submissions.
-              _next     optionally redirects somewhere of ours after sending;
-                        without it Formspree shows its own thank-you page.
-            -->
-            <form class="form book__form" action="https://formspree.io/f/YOUR_FORM_ID" method="post">
+            <form class="form book__form" action="https://formspree.io/f/xkjondqo" method="post">
               <input type="hidden" name="_subject" value="Consultation request from wwhdllc.com/start" />
               <input class="visually-hidden" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" />
 
