@@ -73,9 +73,9 @@
     });
   }
 
-  /* Pause while the visitor is reading or tabbing through the hero */
-  hero.addEventListener('mouseenter', stop);
-  hero.addEventListener('mouseleave', start);
+  /* Pause while a keyboard user is tabbing through the hero. No hover pause:
+     the hero fills the screen on arrival, so the cursor is nearly always over
+     it and the photos would never start turning. */
   hero.addEventListener('focusin', stop);
   hero.addEventListener('focusout', start);
 
