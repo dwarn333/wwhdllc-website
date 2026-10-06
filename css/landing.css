@@ -1,30 +1,41 @@
 /* ==========================================================================
    WW Housing Development LLC — landing.css
-   The /start/ campaign page only. It borrows the tokens, .btn, .check, .form
-   and .field components from global.css, and nothing else: no navigation,
-   no marquee, no pricing, no map, no footer columns.
+   The /start/ campaign page only. It borrows the tokens, the site header, .btn,
+   .check, .form and .field components from global.css: no marquee, no
+   pricing, no map, no footer columns.
 
    MOBILE FIRST: base rules target the smallest viewport; min-width queries
    enhance for larger screens (handbook §12).
    ========================================================================== */
 
 /* ==========================================================================
-   Bar — a logo and a phone number, not a navigation
+   Header — the site's own header (global.css) with a call strip on top for
+   phones and tablets, where the utility bar carrying the number is hidden
    ========================================================================== */
-.landing-bar {
+
+/* Section links land below the sticky header rather than behind it */
+html {
+  scroll-padding-top: calc(var(--nav-bar-height) + 3.5rem);
+}
+
+.call-strip {
   background-color: var(--clr-primary-deep);
+  border-bottom: 1px solid var(--clr-line-on-dark);
 }
 
-.landing-bar__inner {
+.call-strip__inner {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-md);
-  padding-block: var(--space-md);
+  justify-content: center;
+  padding-block: var(--space-xs);
 }
 
-.landing-bar__call {
+@media (min-width: 68em) {
+  .call-strip {
+    display: none;
+  }
+}
+
+.call-strip__link {
   display: inline-flex;
   align-items: center;
   gap: var(--space-xs);
@@ -35,12 +46,12 @@
   transition: color var(--t-base) var(--ease-out);
 }
 
-.landing-bar__call:hover,
-.landing-bar__call:focus-visible {
+.call-strip__link:hover,
+.call-strip__link:focus-visible {
   color: var(--clr-accent-light);
 }
 
-.landing-bar__call-icon {
+.call-strip__icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -52,7 +63,7 @@
   color: var(--clr-primary);
 }
 
-.landing-bar__call-icon svg {
+.call-strip__icon svg {
   width: 1rem;
   height: 1rem;
 }
@@ -229,18 +240,6 @@
   object-fit: cover;
   /* The portrait is a head-and-shoulders crop; without this the face sits low */
   object-position: center 22%;
-}
-
-/* Stands in for a portrait until the second picture arrives */
-.person__photo--monogram {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--clr-primary);
-  color: var(--clr-accent-light);
-  font-size: clamp(2rem, 6vw, 2.75rem);
-  font-weight: var(--fw-bold);
-  letter-spacing: 0.06em;
 }
 
 .person__body {

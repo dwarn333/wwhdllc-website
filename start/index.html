@@ -13,13 +13,14 @@
       CAMPAIGN LANDING PAGE — not part of the site's navigation.
 
       Deliberately different from the rest of the site:
-        - no navigation, no marquee, no pricing, no map, no social links.
-          Every link is a way out, and this page has one job.
+        - the site's header, but its links jump to sections on this page,
+          plus one "Visit Main Site" button. No marquee, pricing, map or
+          social links.
         - no splash screen. Someone arriving from a flyer or a QR code should
           see the offer immediately, not a logo animation.
-        - one script only, global.js, for the step cards' hover. There is no
-        navigation to drive, no accordion and no carousel here, and every
-        other block inside it no-ops on a page without them.
+        - one script only, global.js, for the mobile menu, the step cards'
+        hover and the back-to-top button. Every other block inside it no-ops
+        on a page without its markup.
 
       Lives at /start/ so the printed URL is wwhdllc.com/start — short enough
       for a business card, and it stays valid if the page is ever rebuilt.
@@ -61,23 +62,146 @@
   <body class="landing">
     <a class="skip-link" href="#book">Skip to the form</a>
 
-    <header class="landing-bar">
-      <div class="container landing-bar__inner">
-        <span class="brand">
-          <span class="brand__mark" aria-hidden="true">WW</span>
-          <span class="brand__text">
-            <span class="brand__name">WW Housing</span>
-            <span class="brand__suffix">Development LLC</span>
-          </span>
-        </span>
+    <header class="site-header">
+      <!-- Utility bar: desktop only -->
+      <div class="utility-bar">
+        <div class="container utility-bar__inner">
+          <ul class="utility-bar__contacts">
+            <li class="utility-item">
+              <span class="utility-item__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+              </span>
+              <span class="utility-item__text">
+                <span class="utility-item__label">Our Office</span>
+                <span class="utility-item__value">Houston, Texas</span>
+              </span>
+            </li>
 
-        <a class="landing-bar__call" href="tel:+18328959941">
-          <span class="landing-bar__call-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" /></svg>
-          </span>
-          <span class="landing-bar__call-text">(832) 895-9941</span>
-        </a>
+            <li class="utility-item">
+              <span class="utility-item__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                </svg>
+              </span>
+              <span class="utility-item__text">
+                <span class="utility-item__label">Call Us</span>
+                <a class="utility-item__value" href="tel:+18328959941">(832) 895-9941</a>
+              </span>
+            </li>
+
+            <li class="utility-item">
+              <span class="utility-item__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" />
+                  <polyline points="22 6 12 13 2 6" />
+                </svg>
+              </span>
+              <span class="utility-item__text">
+                <span class="utility-item__label">Email</span>
+                <a class="utility-item__value" href="mailto:wwhsgdev@gmail.com">wwhsgdev@gmail.com</a>
+              </span>
+            </li>
+          </ul>
+        </div>
       </div>
+
+      <!-- Call strip: phones and tablets only. The desktop utility bar carries the number there. -->
+      <div class="call-strip">
+        <div class="container call-strip__inner">
+          <a class="call-strip__link" href="tel:+18328959941">
+            <span class="call-strip__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" /></svg>
+            </span>
+            <span>Call us: (832) 895-9941</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Main navigation bar -->
+      <div class="nav-bar">
+        <div class="container nav-bar__inner">
+          <a class="brand" href="../index.html">
+            <span class="brand__mark" aria-hidden="true">WW</span>
+            <span class="brand__text">
+              <span class="brand__name">WW Housing</span>
+              <span class="brand__suffix">Development LLC</span>
+            </span>
+          </a>
+
+          <button
+            class="nav-toggle"
+            type="button"
+            aria-label="Open menu"
+            aria-expanded="false"
+            aria-controls="primary-nav"
+          >
+            <span class="nav-toggle__bars" aria-hidden="true">
+              <span></span>
+              <span></span>
+              <span></span>
+            </span>
+          </button>
+
+          <nav class="primary-nav" id="primary-nav" aria-label="Primary">
+            <button class="nav-close" type="button" aria-label="Close menu">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+            </button>
+
+            <ul class="primary-nav__list">
+              <li class="primary-nav__item"><a href="#book">Free Consultation</a></li>
+              <li class="primary-nav__item"><a href="#team">Meet the Team</a></li>
+              <li class="primary-nav__item"><a href="#what-you-get">What You Get</a></li>
+            </ul>
+
+            <a class="btn btn--accent primary-nav__cta" href="../index.html">
+              Visit Main Site
+              <svg class="btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="7" y1="17" x2="17" y2="7" />
+                <polyline points="7 7 17 7 17 17" />
+              </svg>
+            </a>
+
+            <ul class="primary-nav__contact">
+              <li>
+                <a href="tel:+18328959941">
+                  <span class="primary-nav__contact-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                    </svg>
+                  </span>
+                  <span class="primary-nav__contact-text">
+                    <span class="primary-nav__contact-label">Call Us</span>
+                    <span class="primary-nav__contact-value">(832) 895-9941</span>
+                  </span>
+                </a>
+              </li>
+
+              <li>
+                <a href="mailto:wwhsgdev@gmail.com">
+                  <span class="primary-nav__contact-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" />
+                      <polyline points="22 6 12 13 2 6" />
+                    </svg>
+                  </span>
+                  <span class="primary-nav__contact-text">
+                    <span class="primary-nav__contact-label">Email</span>
+                    <span class="primary-nav__contact-value">wwhsgdev@gmail.com</span>
+                  </span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+
+      <div class="nav-overlay"></div>
     </header>
 
     <main id="main">
@@ -168,20 +292,17 @@
         </div>
       </section>
 
-      <section class="section people has-texture curve-out" aria-labelledby="people-title">
+      <section class="section people has-texture curve-out" id="team" aria-labelledby="people-title">
         <div class="section-texture" aria-hidden="true"></div>
 
         <div class="container">
           <h2 class="section-heading people__title" id="people-title">The two people you will be talking to</h2>
-
-          <!--
-            Dr. White's portrait has not been supplied yet, so her card
-            carries a monogram panel at the same size as the photograph. Swap
-            it for a <picture> block matching Mr. Warner's when it arrives.
-          -->
           <ul class="people__list">
             <li class="person">
-              <span class="person__photo person__photo--monogram" aria-hidden="true">MW</span>
+              <picture class="person__photo">
+                <source srcset="../images/people/marilyn-white.webp" type="image/webp" />
+                <img src="../images/people/marilyn-white.jpg" alt="Dr. Marilyn White" width="400" height="400" decoding="async" loading="lazy" />
+              </picture>
 
               <div class="person__body">
                 <h3 class="person__name">Dr. Marilyn White</h3>
@@ -226,7 +347,7 @@
         </div>
       </section>
 
-      <section class="section gives curve-out-white" aria-labelledby="gives-title">
+      <section class="section gives curve-out-white" id="what-you-get" aria-labelledby="gives-title">
         <div class="container">
           <h2 class="section-heading gives__title" id="gives-title">What the first conversation gives you</h2>
 
@@ -396,6 +517,13 @@
         </p>
       </div>
     </footer>
+
+    <button class="to-top" type="button" aria-label="Back to top">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <line x1="12" y1="19" x2="12" y2="5" />
+        <polyline points="5 12 12 5 19 12" />
+      </svg>
+    </button>
 
     <script src="../js/global.js" defer></script>
   </body>
