@@ -846,17 +846,6 @@ button {
   color: var(--clr-accent);
 }
 
-.utility-bar__social {
-  display: flex;
-  align-items: center;
-  gap: var(--space-xs);
-  flex: none;
-  padding-left: var(--space-lg);
-  border-left: 1px solid var(--clr-line);
-  /* Same inset as the contact dividers */
-  margin-block: var(--space-md);
-}
-
 /* --------------------------------------------------------------------------
    6b. Main navigation bar
    -------------------------------------------------------------------------- */
@@ -2704,12 +2693,6 @@ a.contact__point-value:focus-visible {
   padding-block: var(--space-lg);
   border-top: 1px solid var(--clr-line-on-dark);
   text-align: center;
-}
-
-.site-footer__social {
-  display: flex;
-  align-items: center;
-  gap: var(--space-xs);
 }
 
 .site-footer__copyright {
